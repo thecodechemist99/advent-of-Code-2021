@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_LINE_LENGTH 5
+#define MAX_LINE_LENGTH 6 // up to 4 characters plus \n and \0
 #define MAX_LINES 2000
 
 char *parseFile (const char fileName[])
@@ -38,7 +38,7 @@ char *parseFile (const char fileName[])
     {
       /* read line */
       strcpy(*file, line);
-      printf("Line %d: %s\n", i, line);
+      printf("Line %d: %s", i, line);
       i++;
     }
     fclose(fp);
@@ -64,6 +64,7 @@ int main (void)
     /* check for increases */
     for (i = 0; i < MAX_LINES; i++)
     {
+      printf("Line %d: %s", i, &file[i]);
       if (!i)
         lastValue = atoi(&file[i]);
       else
