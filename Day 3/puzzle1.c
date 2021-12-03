@@ -6,7 +6,7 @@
 #define FILENAME "input.txt"
 #define MAX_LINE_LENGTH 12
 #define MAX_LINES 1000
-#define BINARY_REFERENCE 0b111111111111 // as many 0s as MAX_LINE_LENGTH
+#define BINARY_REFERENCE 0b111111111111 // as many 1s as MAX_LINE_LENGTH
 
 char** readFile(char fileName[])
 {
