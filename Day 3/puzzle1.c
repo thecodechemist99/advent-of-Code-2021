@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #define FILENAME "test.txt"
-#define MAX_LINE_LENGTH 14 // up to 12 characters plus \n and \0
-#define MAX_LINES 12 // up to 1000
+#define MAX_LINE_LENGTH 7 // up to 12 characters plus \n and \0
+#define MAX_LINES 13 // up to 1000 + 1
 
 char** readFile(char fileName[])
 {
@@ -55,8 +56,19 @@ int main (void)
   free(file);
   if (file)
   {
-    for (int i = 0; i < MAX_LINES; i++)
-      printf("Line %d: %s", i, file[i]);
+    char gammaRate[MAX_LINE_LENGTH - 1], epsilonRate[MAX_LINE_LENGTH - 1];
+
+    /* Determine gamma rate */
+    int i, j, bit;
+    for (i = 0; i < MAX_LINE_LENGTH - 2; i++) {
+      bit = 0;
+      for (j = 0; j < MAX_LINES; j++) {
+        if (file[j][i] - '0' >= 0)
+        bit += file[j][i] - '0';
+      }
+      gammaRate[i] = round((double)bit / MAX_LINES) + '0';
+    }
+    printf("Gamma rate: %s", gammaRate);
   }
   else
   {
