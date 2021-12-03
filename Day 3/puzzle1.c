@@ -3,9 +3,10 @@
 #include <string.h>
 #include <math.h>
 
-#define FILENAME "test.txt"
-#define MAX_LINE_LENGTH 5
-#define MAX_LINES 13 // up to 1000 + 1
+#define FILENAME "input.txt"
+#define MAX_LINE_LENGTH 12
+#define MAX_LINES 1000
+#define BINARY_REFERENCE 0b111111111111 // as many 0s as MAX_LINE_LENGTH
 
 char** readFile(char fileName[])
 {
@@ -92,7 +93,7 @@ char* intToBinary(int integer) {
 
 unsigned int calcEpsilon(unsigned int gammaRate)
 {
-  int epsilonRate = gammaRate ^ 0b11111;
+  int epsilonRate = gammaRate ^ BINARY_REFERENCE;
   printf("Gamma rate (binary): %s\n", intToBinary(epsilonRate));
   return epsilonRate;
 }
@@ -100,10 +101,15 @@ unsigned int calcEpsilon(unsigned int gammaRate)
 int main(void)
 {
   char** file = readFile((char *)FILENAME);
+
   unsigned int gammaRate = calcGamma(file);
   printf("Gamma rate integer: %d\n", gammaRate);
+
   unsigned int epsilonRate = calcEpsilon(gammaRate);
   printf("Epsilon rate integer: %d\n", epsilonRate);
+
+  printf("Final result: %d\n", gammaRate * epsilonRate);
+
   free(file);
   return 1;
 }
