@@ -3,9 +3,9 @@
 #include <string.h>
 #include <math.h>
 
-#define FILENAME "input.txt"
+#define FILENAME "test.txt"
 #define MAX_LINE_LENGTH 5
-#define MAX_LINES 1000
+#define MAX_LINES 13 // up to 1000 + 1
 
 char** readFile(char fileName[])
 {
